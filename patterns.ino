@@ -24,8 +24,24 @@
    
   void colorFromVolume(){
     
-    // colorWipe(strip1.Color((volts * 100), (volts * 100), 255), strip1.Color((volts * 100), (volts * 100), 255), 200);
-     colorWipe(strip1.Color((volts * 100), 0, 255), strip1.Color((volts * 100), 0, 255), 200);
+    //values for cyan
+    int red = 0;
+    int grn = hueChange;
+    int blu = (255-hueChange);
+    
+    //ceiling for green and floor for blue so we don't get too green
+    
+    if (blu < 80) { 
+      blu = 150;
+    }
+    
+    if (grn > 200) {
+      grn = 200;
+    }
+     
+    //pass the color in 
+     colorWipe(strip1.Color(red, grn, blu), strip1.Color(red, grn, blu), 200);  
+     
   }
   
    //--------------------------------------------------------------------------------
@@ -177,7 +193,7 @@
   
   void blinky(uint32_t c, uint8_t wait) {
 
-    for (int i=0; i<200; i++){
+    for (int i=0; i<150; i++){
   
       int rand = random(0, 240);
       strip1.setPixelColor(rand, c);

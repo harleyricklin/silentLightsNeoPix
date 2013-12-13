@@ -23,6 +23,6 @@
         }
      }
      peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
-     volts = (peakToPeak * 3.3) / 1024;  // convert to volts
-     
+     bits = peakToPeak;  // convert to volts
+     hueChange = (abs(bits - 140) / 620) * 200;
   }
