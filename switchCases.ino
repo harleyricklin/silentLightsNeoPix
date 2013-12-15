@@ -1,6 +1,6 @@
   void peakPattern() {
     
-  int rndVar = random(16);
+  int rndVar = random(19);
   switch (rndVar) {
 
     //blinkys
@@ -102,6 +102,22 @@
     soundSampling();
     break;
 
-
+  //expansion
+  case 17:
+    initialize();
+    expansion(strip1.Color(80, 40, 255),5); //pink
+    soundSampling();
+    break;
+  case 18:
+    initialize();
+    expansion(strip1.Color(0, 100, 255), 5); //cyan
+    soundSampling();
+    break;
+  case 19:
+    initialize();
+    expansion(strip1.Color(0, 0, 255), 5); //blue
+    soundSampling();
+    break;
+    
     }
   }

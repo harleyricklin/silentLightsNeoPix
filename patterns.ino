@@ -25,18 +25,22 @@
   void colorFromVolume(){
     
     //values for cyan
-    int red = 0;
-    int grn = hueChange;
+    int red = hueChange;
+    int grn = 0;
     int blu = (255-hueChange);
     
     //ceiling for green and floor for blue so we don't get too green
     
-    if (blu < 80) { 
-      blu = 150;
-    }
+//    if (blu < 80) { 
+//      blu = 150;
+//    }
     
     if (grn > 200) {
       grn = 200;
+    }
+ 
+    if (red > 200) {
+      red = 200;
     }
      
     //pass the color in 
@@ -211,3 +215,44 @@
     
   }
  
+  //--------------------------------------------------------------------------------
+  void expansion(uint32_t c, uint8_t wait) {
+    
+    // turn on the center gate
+    for(uint16_t i=0; i<strip3.numPixels(); i++) {
+        strip3.setPixelColor(i, c);
+    }
+    
+    //ripple out to nearby gates
+    for(int i=0; i< 160; i++) {
+        strip2.setPixelColor(80 - i, c);
+        strip2.setPixelColor(80 + i, c);
+        strip2.show();
+        if (i < 110) {
+          strip4.setPixelColor(i, c);
+          strip4.setPixelColor(215-i, c);
+          strip4.show();
+        } else if ( i == 110 ) {
+        for(int p=240; p > 215; p--) {
+            strip4.setPixelColor(p, c);
+            strip4.show();
+        }
+    }
+        
+        delay(wait);
+    }
+
+    //ripple out to outer gates
+    for(int i=0; i< 160; i++) {
+        strip1.setPixelColor(80 - i, c);
+        strip1.setPixelColor(80 + i, c);
+        strip1.show();
+        if ( i< 120 ) {
+          strip5.setPixelColor(i, c);
+          strip5.setPixelColor(240-i, c);
+          strip5.show();
+        }        
+        delay(wait);
+    }    
+
+  }
